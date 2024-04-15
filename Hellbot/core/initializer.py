@@ -62,8 +62,9 @@ async def ForcesubSetup() -> None:
     """Initialize Forcesub Config"""
     chats = await db.get_all_forcesubs()
     for chat in chats:
-        if chat not in Config.FORCESUBS:
-            Config.FORCESUBS.add(chat["chat"])
+        chat_tuple = tuple(chat.items())  # Convert dictionary to tuple
+        if chat_tuple not in Config.FORCESUBS:
+            Config.FORCESUBS.add(chat_tuple)
 
 
 async def GachaBotsSetup() -> None:
@@ -92,3 +93,4 @@ async def TemplateSetup() -> None:
     }
 
     Config.TEMPLATES = var_n_value
+    
